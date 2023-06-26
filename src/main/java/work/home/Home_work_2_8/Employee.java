@@ -1,4 +1,7 @@
 package work.home.Home_work_2_8;
+
+import java.util.Objects;
+
 public class Employee {
     private static int id;
     private final int EmployeeId;
@@ -27,5 +30,29 @@ public class Employee {
 
     }
 
+    public String getFullName(){
+        return lastName + " " + firstName + " " + surName;
+    }
+
+    public String getDepartment() {
+        return department;
+    }
+
+    public int getSalary() {
+        return salary;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Employee employee = (Employee) o;
+        return EmployeeId == employee.EmployeeId && salary == employee.salary && Objects.equals(lastName, employee.lastName) && Objects.equals(firstName, employee.firstName) && Objects.equals(surName, employee.surName) && Objects.equals(department, employee.department);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(EmployeeId, lastName, firstName, surName, salary, department);
+    }
 
 }
