@@ -6,6 +6,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.Map;
+
 
 
 @RestController
@@ -55,14 +57,13 @@ public class EmployeeBookController {
         return employeeBookService.findMinSalaryByDepartment(department);
     }
 
-    @GetMapping(path = "/departments/by-department")
-    public List<Employee> getEmployeesByDepartment(@RequestParam ("department") String department){
+    @GetMapping(path = "departments/all", params = "departmentId")
+    public List<Employee> getEmployeesByDepartment(@RequestParam ("departmentId") String department){
         return employeeBookService.getEmployeesByDepartment(department);
     }
 
     @GetMapping(path = "/departments/all")
-    public String getEmployeesDepartmentsAll(){
-        return employeeBookService.getEmployeesDepartmentsAll();
+    public Map<String, List<Employee>> getEmployeesByDepartmentAll() {
+        return employeeBookService.getEmployeesByDepartment();
     }
-
 }

@@ -8,7 +8,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 @Service
-public class EmployeeBookServiceImpl implements work.home.Home_work_2_8.EmployeeBookService {
+public class EmployeeBookServiceImpl implements EmployeeBookService {
     Map<String, Employee> employees = new HashMap<>();
 
     public Map<String, Employee> getEmployees() {
@@ -70,24 +70,9 @@ public class EmployeeBookServiceImpl implements work.home.Home_work_2_8.Employee
                 .collect(Collectors.toList());
     }
 
-    public String getEmployeesDepartmentsAll() {
-        List<String> departments = employees.values().stream()
-                .map(employee -> employee.getDepartment())
-                .distinct()
-                .collect(Collectors.toList());
-
-        String employeesAll = "";
-        for (String department : departments) {
-            employeesAll += "Department of " + department + ": ";
-            String employeesByDepartment = employees.values().stream()
-                    .filter(employee -> employee.getDepartment().contains(department))
-                    .map(Object::toString)
-                    .collect(Collectors.joining(", "));
-            employeesAll += employeesByDepartment + " \n";
-
-        }
-        return employeesAll;
-
+    public Map<String, List<Employee>> getEmployeesByDepartment() {
+        return employees.values().stream()
+                .collect(Collectors.groupingBy(Employee::getDepartment));
     }
 
 }

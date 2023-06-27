@@ -20,8 +20,6 @@ public interface EmployeeBookService {
 
     List<Employee> getEmployeesByDepartment(String department);
 
-    String getEmployeesDepartmentsAll();
-
-
-
+    Map<String, List<Employee>> getEmployeesByDepartment();
 }
+
